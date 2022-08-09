@@ -16,12 +16,10 @@ use App\Http\Controllers\ComplaintController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
-Route::get('/complaints', function () {
-    return view('complaintsList');
-});
+Route::get('/complaints', [ComplaintController::class, 'showAll']);
 
 Route::get('/complaints/create', [ComplaintController::class, 'create']);
 Route::post('/complaints/create', [ComplaintController::class, 'store']);

@@ -71,7 +71,7 @@
                                     <button type="submit">Сохранить</button>
                                 </div>
                                 <div class="col-auto pl-1 pr-1">
-                                    <button type="reset">Отмена</button>
+                                    <button href="/complaints">Отмена</button>
                                 </div>
                             </div>
                         </div>
