@@ -23,9 +23,8 @@ Route::get('/complaints', function () {
     return view('complaintsList');
 });
 
-Route::get('/complaints/create', function () {
-    return view('complaintCreate');
-});
+Route::get('/complaints/create', [ComplaintController::class, 'create']);
+Route::post('/complaints/create', [ComplaintController::class, 'store']);
 
 Route::get('/complaints/{complaint}', [ComplaintController::class, 'show']);
 
