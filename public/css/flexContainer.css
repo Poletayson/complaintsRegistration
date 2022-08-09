@@ -1,0 +1,24 @@
+/* Блок, содержащий плавающее по высоте содержимое. Если нужна статичная шапка, а под ней блок с контентом переменного размера */
+.flexContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+
+/* Растягивающийся блок для контента, работает в связке с .flexContainer */
+.flexContent {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.flexContainerHorizontal {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.flexContentHorizontal {
+    flex-grow: 1;
+    overflow-x: auto;
+}
