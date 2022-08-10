@@ -10,8 +10,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{URL::asset('css/app.css')}}">
         <link rel="stylesheet" href="{{URL::asset('css/bootstrap-4.6.0/bootstrap.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/bootstrap-form-helpers.min.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/app.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/flexContainer.css')}}">
         <style type="text/css" >
             /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
         </style>
@@ -21,30 +23,33 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+        <script type="text/javascript" src="{{URL::asset('js/jquery-3.0.0.min.js')}}"></script>
+        <script type="text/javascript" src="{{URL::asset('js/bootstrap.min.js')}}"></script>
+        <script type="text/javascript" src="{{URL::asset('js/bootstrap-formhelpers.min.js')}}"></script>
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-200 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="mt-8 bg-gray-100 dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <form method="POST" autocomplete="off" action="/complaints/add">
+                    <form method="POST" autocomplete="off" action="/complaints/create">
                         @csrf
                         <div class="text-center">
                             <div class="p-3 m-0">
                                 <h3>Новое обращение</h3>
                             </div>
-                            <div class="row p-3 m-0">
+                            <div class="row p-3 m-0 align-items-center">
                                 <div class="col-auto pl-1 pr-1">
-                                    <input name="surname" type="text" size="15" placeholder="Фамилия">
+                                    <input name="surname" type="text" size="22" placeholder="Фамилия">
                                 </div>
                                 <div class="col-auto pl-1 pr-1">
-                                    <input name="name" type="text" size="15" placeholder="Имя">
+                                    <input name="name" type="text" size="18" placeholder="Имя">
                                 </div>
                                 <div class="col-auto pl-1 pr-1">
-                                    <input name="patronymic" type="text" size="15" placeholder="Отчество">
+                                    <input name="patronymic" type="text" size="20" placeholder="Отчество">
                                 </div>
                                 <div class="col-auto pl-1 pr-1">
-                                    <input name="phone_number" type="tel" size="10" placeholder="+7 xxx xxx xx xx">
+                                    <input name="phone_number"  class="form-control bfh-phone" type="tel" size="15" data-format="+7 (ddd) ddd-dd-dd">
                                 </div>
                             </div>
                             <div class="row justify-content-center p-3 m-0">
@@ -71,7 +76,7 @@
                                     <button type="submit">Сохранить</button>
                                 </div>
                                 <div class="col-auto pl-1 pr-1">
-                                    <button href="/complaints">Отмена</button>
+                                    <button id="cancel">Отмена</button>
                                 </div>
                             </div>
                         </div>
@@ -82,3 +87,9 @@
         </div>
     </body>
 </html>
+<script type="text/javascript">
+    document.getElementById('cancel').onclick = function (event) {
+        event.preventDefault();
+        location.href='/complaints';
+    }
+</script>

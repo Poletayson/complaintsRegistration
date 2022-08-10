@@ -46,8 +46,22 @@ video{max-width:100%;height:auto}
 .h-5{height:1.25rem}
 .h-8{height:2rem}
 .h-16{height:4rem}
+
 .text-sm{font-size:.875rem}
 .text-lg{font-size:1.125rem}
+/* Уменьшенный текст */
+.text-sm-1 {
+    font-size: 0.95rem;
+}
+
+/* Увеличенный текст */
+.text-lg-1 {
+    font-size: 1.15rem;
+}
+.text-lg-2 {
+    font-size: 1.20rem;
+}
+
 .leading-7{line-height:1.75rem}
 .mx-auto{margin-left:auto;margin-right:auto}
 .ml-1{margin-left:.25rem}
@@ -105,10 +119,46 @@ video{max-width:100%;height:auto}
 }
 @media (min-width:768px){.md\:border-t-0{border-top-width:0}.md\:border-l{border-left-width:1px}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--bg-opacity:1;background-color:#2d3748;background-color:rgba(45,55,72,var(--bg-opacity))}.dark\:bg-gray-900{--bg-opacity:1;background-color:#1a202c;background-color:rgba(26,32,44,var(--bg-opacity))}.dark\:border-gray-700{--border-opacity:1;border-color:#4a5568;border-color:rgba(74,85,104,var(--border-opacity))}.dark\:text-white{--text-opacity:1;color:#fff;color:rgba(255,255,255,var(--text-opacity))}.dark\:text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.dark\:text-gray-500{--tw-text-opacity:1;color:#6b7280;color:rgba(107,114,128,var(--tw-text-opacity))}}
 
-input,select,textarea{
+.d-table {
+    border: #6c757d solid 2px;
+    border-radius: 0.2rem;
+}
+
+.d-table-row {
+    border-bottom: #95999c solid 1px;
+}
+
+/* Строка-шапка */
+.d-table-row.header  {
+    font-size: 1.15rem;
+    background-color: #bcd7f1;
+    border-bottom: #b8c1c7 solid 2px;
+}
+
+/* Ячейка шапки */
+.d-table-row.header .d-table-cell:not(:first-child) {
+    border-left: #b8c1c7 solid 2px;
+}
+
+.d-table-row:not(:first-child), .border-top:not(:first-child)  {
+    border-top: #c3c8cc solid 1px;
+}
+
+.d-table-cell {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    /*border: #95999c solid 1px;*/
+}
+
+input,button,select,textarea{
     border: #6c757d solid 1px;
+}
+button{
+    border-radius: 0.2rem;
 }
 
 textarea{
     resize: none;
 }
+
+

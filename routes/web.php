@@ -15,9 +15,7 @@ use App\Http\Controllers\ComplaintController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [ComplaintController::class, 'showAll']);
 
 Route::get('/complaints', [ComplaintController::class, 'showAll']);
 

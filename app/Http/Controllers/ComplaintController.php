@@ -7,6 +7,7 @@ use App\Models\Polyclinic;
 use App\Models\Reason;
 use App\Models\Client;
 use App\Models\Complaint;
+use Illuminate\Support\Facades\Redirect;
 
 class ComplaintController
 {
@@ -35,7 +36,7 @@ class ComplaintController
         $clients = Client::all ();
         $complaintsByUsers = [];    //Обращения пользователей
         foreach ($clients as $client) {
-            $complaints = $client->getComplaints()->sortBy('created_at', SORT_ASC);
+            $complaints = $client->complaints;
 //            Complaint::all()->filter(function ($complaint) use ($client) {
 //                                                                        return $complaint->fk_clients == $client->id;
 //                                                                    })->sortBy('created_at', SORT_ASC);
@@ -74,12 +75,19 @@ class ComplaintController
         //Получаем клиента или создаём, если его ещё нет
         $client = Client::firstOrCreate (
             ['phone_number' => $_POST['phone_number']],
-            ['surname' => $_POST['surname'], 'name' => $_POST['name'], 'patronymic' => $_POST['patronymic']]
+            ['surname' => $_POST['surname'] ?? null, 'name' => $_POST['name'] ?? null, 'patronymic' => $_POST['patronymic']] ?? null
         );
-//        $polyclinics = Polyclinic::all();
-        return view('complaintsList', [
-            'client' => $client,
-            'complaints' => Complaint::all()->sortBy('created_at', SORT_ASC),
-        ]);
+
+        //Поликлиника
+        $polyclinic = Polyclinic::find($_POST['polyclinic']);
+        //Повод обращения
+        $reason = Reason::find($_POST['reason']);
+
+//        $complaint = new Complaint(["fk_polyclinics" => $polyclinic->id, "fk_reasons" => $reason->id, "note" => $_POST['note']]);
+        $client->complaints()->save(new Complaint(["fk_polyclinics" => $polyclinic->id, "fk_reasons" => $reason->id, "note" => $_POST['note']]));
+
+//        $complaint->save();
+
+        Redirect::action([ComplaintController::class, 'showAll']);
     }
 }

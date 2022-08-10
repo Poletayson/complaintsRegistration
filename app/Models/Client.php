@@ -16,11 +16,13 @@ class Client extends Model
      */
     public $timestamps = false;
 
+    protected $fillable = ['phone_number', 'surname', 'name', 'patronymic'];
+
     /**
      * Получить все обращения этого клиента
      */
-    public function getComplaints()
+    public function complaints()
     {
-        return $this->hasMany(Complaint::class, 'fk_clients');
+        return $this->hasMany(Complaint::class, 'fk_clients')->orderBy('created_at', 'desc');
     }
 }
