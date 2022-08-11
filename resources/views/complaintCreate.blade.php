@@ -24,7 +24,7 @@
             }
         </style>
         <script type="text/javascript" src="{{URL::asset('js/jquery-3.0.0.min.js')}}"></script>
-        <script type="text/javascript" src="{{URL::asset('js/bootstrap.min.js')}}"></script>
+        <script type="text/javascript" src="{{URL::asset('js/bootstrap-4.6.0/bootstrap.js')}}"></script>
         <script type="text/javascript" src="{{URL::asset('js/bootstrap-formhelpers.min.js')}}"></script>
     </head>
     <body class="antialiased">

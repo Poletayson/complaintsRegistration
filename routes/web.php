@@ -22,6 +22,7 @@ Route::get('/complaints', [ComplaintController::class, 'showAll']);
 Route::get('/complaints/create', [ComplaintController::class, 'create']);
 Route::post('/complaints/create', [ComplaintController::class, 'store']);
 
-Route::get('/complaints/{complaint}', [ComplaintController::class, 'show']);
+//Route::get('/complaints/{complaint}', [ComplaintController::class, 'show']);
+Route::delete('/complaints/{complaint}', [ComplaintController::class, 'delete']);
 
 

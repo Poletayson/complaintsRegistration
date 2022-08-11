@@ -70,6 +70,20 @@ class ComplaintController
      *
      * @return \Illuminate\View\View
      */
+    public function delete($id)
+    {
+        Complaint::destroy($id);
+
+        return response()->json([
+                'success' => 'Обращение успешно удалено'
+            ]);   //redirect()->guest('/complaints')->with($resultKey, $resultValue);
+    }
+
+    /**
+     * Добавление нового обращения
+     *
+     * @return \Illuminate\View\View
+     */
     public function store()
     {
         //Получаем клиента или создаём, если его ещё нет
@@ -83,11 +97,9 @@ class ComplaintController
         //Повод обращения
         $reason = Reason::find($_POST['reason']);
 
-//        $complaint = new Complaint(["fk_polyclinics" => $polyclinic->id, "fk_reasons" => $reason->id, "note" => $_POST['note']]);
         $client->complaints()->save(new Complaint(["fk_polyclinics" => $polyclinic->id, "fk_reasons" => $reason->id, "note" => $_POST['note']]));
 
-//        $complaint->save();
 
-        Redirect::action([ComplaintController::class, 'showAll']);
+        return redirect()->guest('/complaints')->with('success', 'Обращение успешно добавлено');
     }
 }

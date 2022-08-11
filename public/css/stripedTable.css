@@ -1,0 +1,57 @@
+/* ---Полосатая таблица. Обратите внимание, подсветка наведенных строк теперь реализуется дополнительным классом lighting!--- */
+
+
+
+/* Наблюдение: border-bottom перекрывает border-top от нижнего элемента. Или*/
+ /* Класс для создания границ между строками */
+ .bordersRows tr:not(:last-child)  {
+    border-bottom: 1px solid black;
+}
+
+ /* Класс для создания границ между столбцами */
+.bordersColumns td,th:not(:last-child)  {
+    border-right: 1px solid black;
+}
+
+
+.stripedTable th {
+    background: #CCD1D4;
+}
+
+
+.stripedTable td * {
+    padding: 0px 0px;
+}
+
+/*у нечетных строк один цвет*/
+.stripedTable tr:nth-child(odd) {
+    background: #D9DFED;
+}
+
+/*у четных строк другой цвет*/
+.stripedTable tr:nth-child(even) {
+    background: #BEC3C4;
+}
+
+/* Классы для реализации полосатой таблицы блоками Bootstrap*/
+/*.stripedTable div.row:not(:first-child)  {*/
+/*    border-bottom: 1px solid #95bce2;*/
+/*}*/
+
+/*.stripedTable div.row:not(:last-child)  {*/
+/*    border-top: 1px solid black;*/
+/*}*/
+
+/*.stripedTable div.row div:not(:last-child)  {*/
+/*    border-right: 1px solid black;*/
+/*}*/
+
+/*у нечетных строк один цвет*/
+.stripedTable div.d-table-row:not(.header):nth-child(odd) {
+    background: #eceff1;
+}
+
+/*у четных строк другой цвет*/
+.stripedTable div.d-table-row:not(.header):nth-child(even) {
+    background: #f7f8fd;
+}
