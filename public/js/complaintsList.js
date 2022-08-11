@@ -27,3 +27,12 @@ function deleteComplaint (event) {
     }
 
 }
+
+/**
+ * Открытие формы редактирования
+ * @param event
+ */
+function editStart (event) {
+    let complaintId = event.target.attributes['data-complaintId'].value;
+    window.location.replace(`/complaints/${complaintId}/edit`)
+}

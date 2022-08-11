@@ -58,8 +58,23 @@ class ComplaintController
      */
     public function create()
     {
-        $polyclinics = Polyclinic::all();
         return view('complaintCreate', [
+            'polyclinics' => Polyclinic::all()->sortBy('title', SORT_ASC),
+            'reasons' => Reason::all()->sortBy('title', SORT_ASC),
+        ]);
+    }
+
+    /**
+     * Окно для редактирования обращения
+     *
+     * @return \Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $complaint = Complaint::find($id);
+        return view('complaintEdit', [
+            'complaint' => $complaint,
+            'client' => $complaint->client(),
             'polyclinics' => Polyclinic::all()->sortBy('title', SORT_ASC),
             'reasons' => Reason::all()->sortBy('title', SORT_ASC),
         ]);

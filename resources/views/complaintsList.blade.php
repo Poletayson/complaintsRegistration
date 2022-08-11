@@ -68,7 +68,7 @@
                                         <div>{{$complaint->note}}</div>
                                     </div>
                                     <div class="col-auto">
-                                        <div class='buttonImage'><img src='{{URL::asset('images/Edit.png')}}' data-complaintId="{{$complaint->id}}" onclick="editComplaint()"></div>
+                                        <div id="buttonEdit-{{$complaint->id}}" class='buttonImage'><img src='{{URL::asset('images/Edit.png')}}' data-complaintId="{{$complaint->id}}"></div>
                                         <div id="buttonDelete-{{$complaint->id}}" class='buttonImage'><img  src='{{URL::asset('images/Delete.png')}}' data-complaintId="{{$complaint->id}}"></div>
                                     </div>
                                 </div>
@@ -86,6 +86,7 @@
 </html>
 <script type="text/javascript">
     $(document).ready (function () {
+        $("div[id^='buttonEdit']").on('click', editStart);
         $("div[id^='buttonDelete']").on('click', deleteComplaint);
     });
 </script>
