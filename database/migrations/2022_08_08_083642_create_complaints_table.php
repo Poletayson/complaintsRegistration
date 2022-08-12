@@ -24,7 +24,7 @@ class CreateComplaintsTable extends Migration
 
             $table->foreignId('fk_polyclinics')->constrained('polyclinics')->onDelete('cascade');    //Сокращенная запись создания внешнего ключа
             $table->foreignId('fk_reasons')->constrained('reasons')->nullOnDelete();
-            $table->text('note');
+            $table->text('note')->nullable();
 
 
         });

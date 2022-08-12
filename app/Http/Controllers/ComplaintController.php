@@ -11,18 +11,18 @@ use Illuminate\Support\Facades\Redirect;
 
 class ComplaintController
 {
-    /**
-     * Показать конкретную жалобу
-     *
-     * @param  int  $id
-     * @return \Illuminate\View\View
-     */
-    public function show($id)
-    {
-//        return view('user.profile', [
-//            'user' => User::findOrFail($id)
-//        ]);
-    }
+//    /**
+//     * Показать конкретную жалобу
+//     *
+//     * @param  int  $id
+//     * @return \Illuminate\View\View
+//     */
+//    public function show($id)
+//    {
+////        return view('user.profile', [
+////            'user' => User::findOrFail($id)
+////        ]);
+//    }
 
     /**
      * Показать конкретную жалобу
@@ -74,7 +74,7 @@ class ComplaintController
         $complaint = Complaint::find($id);
         return view('complaintEdit', [
             'complaint' => $complaint,
-            'client' => $complaint->client(),
+            'client' => $complaint->client,
             'polyclinics' => Polyclinic::all()->sortBy('title', SORT_ASC),
             'reasons' => Reason::all()->sortBy('title', SORT_ASC),
         ]);
@@ -104,17 +104,64 @@ class ComplaintController
         //Получаем клиента или создаём, если его ещё нет
         $client = Client::firstOrCreate (
             ['phone_number' => $_POST['phone_number']],
-            ['surname' => $_POST['surname'] ?? null, 'name' => $_POST['name'] ?? null, 'patronymic' => $_POST['patronymic']] ?? null
+            ['surname' => $_POST['surname'] ?? null, 'name' => $_POST['name'] ?? null, 'patronymic' => $_POST['patronymic'] ?? null]
         );
 
-        //Поликлиника
-        $polyclinic = Polyclinic::find($_POST['polyclinic']);
-        //Повод обращения
-        $reason = Reason::find($_POST['reason']);
-
-        $client->complaints()->save(new Complaint(["fk_polyclinics" => $polyclinic->id, "fk_reasons" => $reason->id, "note" => $_POST['note']]));
-
+        $client->complaints()->save(new Complaint(["fk_polyclinics" => $_POST['polyclinic'], "fk_reasons" => $_POST['reason'], "note" => $_POST['note']]));
 
         return redirect()->guest('/complaints')->with('success', 'Обращение успешно добавлено');
+    }
+
+    /**
+     * Изменение обращения
+     *
+     * @return \Illuminate\View\View
+     */
+    public function update()
+    {
+        $result = 'success';
+        $resultValue = 'Обращение успешно обновлено';
+parse_str(file_get_contents('php://input'), $data); //Получаем масссив с параметрами
+//        $data = file_get_contents('php://input');
+        //Получаем клиента или создаём, если его ещё нет
+        $client = Client::firstWhere('phone_number', $data['phone_number']);
+        //Клиента с таким номером нет, создаём
+        if ($client == null) {
+            $client = Client::create (['phone_number' => $data['phone_number'], 'surname' => $data['surname'] ?? null, 'name' => $data['name'] ?? null, 'patronymic' => $data['patronymic'] ?? null]);
+        } else {
+            if ($client->surname != $data['surname'])
+                $client->surname = $data['surname'];
+            if ($client->name != $data['name'])
+                $client->name = $data['name'];
+            if ($client->patronymic != $data['patronymic'])
+                $client->patronymic = $data['patronymic'];
+            //Были изменения - сохраняем
+            if ($client->isDirty())
+                $client->save();
+        }
+
+        $complaint = Complaint::find($data['id']);
+        if ($complaint != null) {
+            if ($complaint->fk_polyclinics != $data['polyclinic'])
+                $complaint->fk_polyclinics = $data['polyclinic'];
+            if ($complaint->fk_reasons != $data['reason'])
+                $complaint->fk_reasons = $data['reason'];
+            if ($complaint->note != $data['note'])
+                $complaint->note = $data['note'];
+            //Если изменить номер, то поменяется клиент
+            if ($complaint->fk_clients != $client['id'])
+                $complaint->fk_clients = $client['id'];
+
+            //Были изменения - сохраняем
+            if ($complaint->isDirty())
+                $complaint->save();
+        } else {
+            $result = 'error';
+            $resultValue = 'Обращение не найдено';
+        }
+
+
+
+        return redirect()->guest('/complaints')->with($result, $resultValue);
     }
 }

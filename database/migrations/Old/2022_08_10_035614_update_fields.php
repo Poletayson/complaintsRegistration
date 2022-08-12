@@ -16,15 +16,11 @@ class UpdateFields extends Migration
      */
     public function up()
     {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->string('phone_number', 20)->change();
-            $table->string('patronymic')->nullable()->change();
-        });
-        Schema::table('complaints', function (Blueprint $complaint) {
-            $complaint->text('note')->nullable()->change();
-            $complaint->text('created_at')->nullable()->change();
-            $complaint->text('updated_at')->nullable()->change();
-        });
+//
+//        Schema::table('complaints', function (Blueprint $complaint) {
+//            $complaint->text('created_at')->nullable()->change();
+//            $complaint->text('updated_at')->nullable()->change();
+//        });
     }
 
     /**

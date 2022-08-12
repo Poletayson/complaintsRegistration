@@ -40,16 +40,16 @@
                             </div>
                             <div class="row p-3 m-0 align-items-center">
                                 <div class="col-auto pl-1 pr-1">
-                                    <input name="surname" type="text" size="22" placeholder="Фамилия">
+                                    <input name="surname" type="text" size="22" autocomplete="off" placeholder="Фамилия">
                                 </div>
                                 <div class="col-auto pl-1 pr-1">
-                                    <input name="name" type="text" size="18" placeholder="Имя">
+                                    <input name="name" type="text" size="18" autocomplete="off" placeholder="Имя">
                                 </div>
                                 <div class="col-auto pl-1 pr-1">
-                                    <input name="patronymic" type="text" size="20" placeholder="Отчество">
+                                    <input name="patronymic" type="text" size="20" autocomplete="off" placeholder="Отчество">
                                 </div>
                                 <div class="col-auto pl-1 pr-1">
-                                    <input name="phone_number"  class="form-control bfh-phone" type="tel" size="15" data-format="+7 (ddd) ddd-dd-dd">
+                                    <input name="phone_number" required class="form-control bfh-phone" type="tel" size="15" autocomplete="off" data-format="+7 (ddd) ddd-dd-dd">
                                 </div>
                             </div>
                             <div class="row justify-content-center p-3 m-0">

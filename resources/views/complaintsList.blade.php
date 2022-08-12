@@ -39,45 +39,47 @@
                     {{ session('success') }}
                 </div>
             @endif
-                <div class="flexContent flexContainerHorizontal m-0 justify-content-center">
-                    <div class="flexContentHorizontal"></div>
-                    <div class="d-table stripedTable bg-gray-100 m-0">
-                        <div class="d-table-row header text-center">
-                            <div class="d-table-cell p-2">
-                                <p class="m-0">Клиент</p>
-                            </div>
-                            <div class="d-table-cell p-2">
-                                <p class="m-0">Обращение</p>
-                            </div>
-                        </div>
-                    @foreach($complaintsByUsers as $complaintsByUser)
-                        <div class="d-table-row">
-                            <div class="d-table-cell text-center">
-                                <div>{{$complaintsByUser['client']->surname}} {{$complaintsByUser['client']->name}} {{$complaintsByUser['client']->patronymic}}</div>
-                                <div>{{$complaintsByUser['client']->phone_number}}</div>
-                            </div>
-                            <div class="d-table-cell border-left">
-                            @foreach($complaintsByUser['complaints'] as $complaint)
-                                <div class="row border-top">
-                                    <div class="col">
-                                        <div class="text-sm-1">{{$complaint->created_at}} </div>
-                                        <div class="p-2">{{$complaint->polyclinic->title}}</div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="text-lg">{{$complaint->reason->title}} </div>
-                                        <div>{{$complaint->note}}</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div id="buttonEdit-{{$complaint->id}}" class='buttonImage'><img src='{{URL::asset('images/Edit.png')}}' data-complaintId="{{$complaint->id}}"></div>
-                                        <div id="buttonDelete-{{$complaint->id}}" class='buttonImage'><img  src='{{URL::asset('images/Delete.png')}}' data-complaintId="{{$complaint->id}}"></div>
-                                    </div>
+                <div class="flexContent  m-0 justify-content-center">
+                    <div class="flexContainerHorizontal">
+                        <div class="flexContentHorizontal"></div>
+                        <div class="d-table stripedTable bg-gray-100 m-0">
+                            <div class="d-table-row header text-center">
+                                <div class="d-table-cell p-2">
+                                    <p class="m-0">Клиент</p>
                                 </div>
-                            @endforeach
+                                <div class="d-table-cell p-2">
+                                    <p class="m-0">Обращение</p>
+                                </div>
                             </div>
+                        @foreach($complaintsByUsers as $complaintsByUser)
+                            <div class="d-table-row">
+                                <div class="d-table-cell text-center">
+                                    <div>{{$complaintsByUser['client']->surname}} {{$complaintsByUser['client']->name}} {{$complaintsByUser['client']->patronymic}}</div>
+                                    <div>{{$complaintsByUser['client']->phone_number}}</div>
+                                </div>
+                                <div class="d-table-cell border-left">
+                                @foreach($complaintsByUser['complaints'] as $complaint)
+                                    <div class="row border-top">
+                                        <div class="col">
+                                            <div class="text-sm-1">{{$complaint->created_at}} </div>
+                                            <div class="p-2">{{$complaint->polyclinic->title}}</div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="text-lg">{{$complaint->reason->title}} </div>
+                                            <div>{{$complaint->note}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div id="buttonEdit-{{$complaint->id}}" class='buttonImage' title="Редактировать"><img src='{{URL::asset('images/Edit.png')}}' data-complaintId="{{$complaint->id}}"></div>
+                                            <div id="buttonDelete-{{$complaint->id}}" class='buttonImage' title="Удалить"><img  src='{{URL::asset('images/Delete.png')}}' data-complaintId="{{$complaint->id}}"></div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                </div>
+                            </div>
+                        @endforeach
                         </div>
-                    @endforeach
+                        <div class="flexContentHorizontal"></div>
                     </div>
-                    <div class="flexContentHorizontal"></div>
                 </div>
 
             </div>
